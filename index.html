@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Indian Fake Data Generator – Free Tool</title>
+  <meta name="description" content="Generate fake Indian data for testing – names, addresses, Aadhaar, PAN, phone numbers and more. No login required."/>
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;600;800&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --saffron: #FF6B00;
+      --saffron-light: #FF9A3C;
+      --green: #00A86B;
+      --green-light: #4ECDA4;
+      --blue: #1565C0;
+      --indigo: #3D5AF1;
+      --pink: #E91E8C;
+      --yellow: #FFD600;
+      --bg: #0A0A14;
+      --card: #13131F;
+      --card2: #1A1A2E;
+      --border: rgba(255,255,255,0.08);
+      --text: #F0F0FF;
+      --muted: #888AAA;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* BG Pattern */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 80% 50% at 10% 10%, rgba(255,107,0,0.12) 0%, transparent 60%),
+        radial-gradient(ellipse 60% 40% at 90% 80%, rgba(0,168,107,0.10) 0%, transparent 60%),
+        radial-gradient(ellipse 50% 60% at 50% 50%, rgba(61,90,241,0.07) 0%, transparent 70%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 20px; position: relative; z-index: 1; }
+
+    /* HEADER */
+    header {
+      padding: 28px 0 20px;
+      border-bottom: 1px solid var(--border);
+    }
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .logo {
+      font-family: 'Baloo 2', cursive;
+      font-size: 1.7rem;
+      font-weight: 800;
+      background: linear-gradient(90deg, var(--saffron), var(--yellow), var(--green));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .logo span { font-size: 1.1rem; opacity: 0.7; font-weight: 400; display: block; color: var(--muted); -webkit-text-fill-color: var(--muted); }
+    .badge {
+      background: linear-gradient(135deg, var(--saffron), var(--pink));
+      color: white;
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 5px 14px;
+      border-radius: 999px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    /* HERO */
+    .hero {
+      text-align: center;
+      padding: 52px 0 36px;
+    }
+    .hero h1 {
+      font-family: 'Baloo 2', cursive;
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      font-weight: 800;
+      line-height: 1.15;
+      margin-bottom: 14px;
+    }
+    .hero h1 .hi { color: var(--saffron); }
+    .hero h1 .free { color: var(--green-light); }
+    .hero p {
+      color: var(--muted);
+      font-size: 1.05rem;
+      max-width: 560px;
+      margin: 0 auto 28px;
+    }
+
+    /* CATEGORY TABS */
+    .tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: center;
+      margin-bottom: 36px;
+    }
+    .tab {
+      padding: 9px 20px;
+      border-radius: 999px;
+      border: 1.5px solid var(--border);
+      background: var(--card);
+      color: var(--muted);
+      font-size: 0.88rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .tab:hover { border-color: var(--saffron); color: var(--saffron); }
+    .tab.active {
+      background: linear-gradient(135deg, var(--saffron), var(--saffron-light));
+      border-color: transparent;
+      color: white;
+    }
+
+    /* MAIN CARD */
+    .main-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      overflow: hidden;
+      margin-bottom: 40px;
+      box-shadow: 0 8px 60px rgba(0,0,0,0.4);
+    }
+    .card-top {
+      padding: 28px 30px 22px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+    .card-title {
+      font-family: 'Baloo 2', cursive;
+      font-size: 1.25rem;
+      font-weight: 700;
+    }
+    .controls { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+
+    .count-select {
+      background: var(--card2);
+      border: 1.5px solid var(--border);
+      color: var(--text);
+      padding: 8px 16px;
+      border-radius: 10px;
+      font-size: 0.9rem;
+      font-family: 'DM Sans', sans-serif;
+      cursor: pointer;
+      outline: none;
+    }
+    .count-select:focus { border-color: var(--saffron); }
+
+    .btn {
+      padding: 10px 24px;
+      border-radius: 12px;
+      border: none;
+      font-weight: 700;
+      font-size: 0.92rem;
+      cursor: pointer;
+      transition: all 0.18s;
+      font-family: 'DM Sans', sans-serif;
+      display: flex;
+      align-items: center;
+      gap: 7px;
+    }
+    .btn-generate {
+      background: linear-gradient(135deg, var(--saffron), var(--saffron-light));
+      color: white;
+    }
+    .btn-generate:hover { transform: translateY(-2px); box-shadow: 0 6px 24px rgba(255,107,0,0.4); }
+    .btn-copy {
+      background: var(--card2);
+      color: var(--text);
+      border: 1.5px solid var(--border);
+    }
+    .btn-copy:hover { border-color: var(--green); color: var(--green); }
+    .btn-csv {
+      background: linear-gradient(135deg, var(--green), var(--green-light));
+      color: white;
+    }
+    .btn-csv:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,168,107,0.35); }
+
+    /* TABLE */
+    .table-wrap { overflow-x: auto; }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.88rem;
+    }
+    thead tr {
+      background: var(--card2);
+    }
+    th {
+      padding: 13px 16px;
+      text-align: left;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      color: var(--muted);
+      font-weight: 700;
+      white-space: nowrap;
+    }
+    td {
+      padding: 13px 16px;
+      border-top: 1px solid var(--border);
+      color: var(--text);
+      white-space: nowrap;
+    }
+    tr:hover td { background: rgba(255,255,255,0.03); }
+
+    .copy-cell {
+      cursor: pointer;
+      color: var(--muted);
+      transition: color 0.15s;
+      font-size: 0.8rem;
+    }
+    .copy-cell:hover { color: var(--saffron); }
+
+    /* Color tags */
+    .tag {
+      display: inline-block;
+      padding: 2px 10px;
+      border-radius: 6px;
+      font-size: 0.78rem;
+      font-weight: 600;
+    }
+    .tag-m { background: rgba(61,90,241,0.18); color: #7B9EFF; }
+    .tag-f { background: rgba(233,30,140,0.15); color: #FF80C8; }
+
+    /* EMPTY STATE */
+    .empty-state {
+      text-align: center;
+      padding: 64px 20px;
+      color: var(--muted);
+    }
+    .empty-state .icon { font-size: 3.5rem; margin-bottom: 14px; }
+    .empty-state p { font-size: 1rem; }
+
+    /* TOAST */
+    .toast {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      background: var(--green);
+      color: white;
+      padding: 12px 22px;
+      border-radius: 12px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.3s;
+      z-index: 1000;
+    }
+    .toast.show { opacity: 1; transform: translateY(0); }
+
+    /* STATS BAR */
+    .stats-bar {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      padding: 14px 30px;
+      border-top: 1px solid var(--border);
+      background: rgba(255,255,255,0.02);
+    }
+    .stat {
+      font-size: 0.78rem;
+      color: var(--muted);
+    }
+    .stat b { color: var(--saffron); }
+
+    /* INFO CARDS */
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 16px;
+      margin-bottom: 50px;
+    }
+    .info-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 22px;
+      transition: border-color 0.2s;
+    }
+    .info-card:hover { border-color: var(--saffron); }
+    .info-card .icon { font-size: 2rem; margin-bottom: 10px; }
+    .info-card h3 { font-family: 'Baloo 2', cursive; font-size: 1rem; font-weight: 700; margin-bottom: 5px; }
+    .info-card p { color: var(--muted); font-size: 0.83rem; line-height: 1.5; }
+
+    footer {
+      text-align: center;
+      padding: 30px 0;
+      color: var(--muted);
+      font-size: 0.82rem;
+      border-top: 1px solid var(--border);
+    }
+    footer a { color: var(--saffron); text-decoration: none; }
+
+    @media(max-width: 600px) {
+      .card-top { flex-direction: column; align-items: flex-start; }
+      .controls { width: 100%; }
+      .btn { flex: 1; justify-content: center; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+
+  <!-- HEADER -->
+  <header>
+    <div class="header-inner">
+      <div class="logo">
+        🇮🇳 IndiaFakeData
+        <span>Free Indian Test Data Generator</span>
+      </div>
+      <span class="badge">✨ No Login Required</span>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <div class="hero">
+    <h1>Generate <span class="hi">Indian</span> Fake Data<br/>for <span class="free">Testing & Dev</span></h1>
+    <p>Instantly generate realistic Indian names, addresses, Aadhaar, PAN, phone numbers and more. 100% free, no signup needed.</p>
+  </div>
+
+  <!-- TABS -->
+  <div class="tabs">
+    <button class="tab active" onclick="setCategory('person')" id="tab-person">👤 Person</button>
+    <button class="tab" onclick="setCategory('address')" id="tab-address">📍 Address</button>
+    <button class="tab" onclick="setCategory('finance')" id="tab-finance">💳 Finance</button>
+    <button class="tab" onclick="setCategory('internet')" id="tab-internet">🌐 Internet</button>
+    <button class="tab" onclick="setCategory('vehicle')" id="tab-vehicle">🚗 Vehicle</button>
+  </div>
+
+  <!-- MAIN CARD -->
+  <div class="main-card">
+    <div class="card-top">
+      <div class="card-title" id="card-title">👤 Person Data</div>
+      <div class="controls">
+        <select class="count-select" id="count-select">
+          <option value="5">5 Records</option>
+          <option value="10" selected>10 Records</option>
+          <option value="25">25 Records</option>
+          <option value="50">50 Records</option>
+        </select>
+        <button class="btn btn-generate" onclick="generate()">⚡ Generate</button>
+        <button class="btn btn-copy" onclick="copyJSON()">📋 Copy JSON</button>
+        <button class="btn btn-csv" onclick="downloadCSV()">⬇️ CSV</button>
+      </div>
+    </div>
+
+    <div class="table-wrap" id="table-wrap">
+      <div class="empty-state">
+        <div class="icon">🎲</div>
+        <p>Click <strong>Generate</strong> to create fake Indian data!</p>
+      </div>
+    </div>
+
+    <div class="stats-bar" id="stats-bar" style="display:none">
+      <span class="stat">Generated: <b id="stat-count">0</b> records</span>
+      <span class="stat" style="margin-left:auto;color:var(--green-light)">✅ All data is 100% fake & safe to use</span>
+    </div>
+  </div>
+
+  <!-- INFO CARDS -->
+  <div class="info-grid">
+    <div class="info-card">
+      <div class="icon">🔒</div>
+      <h3>100% Safe & Fake</h3>
+      <p>All generated data is completely fictional. No real person's data is used or stored.</p>
+    </div>
+    <div class="info-card">
+      <div class="icon">⚡</div>
+      <h3>Instant Generation</h3>
+      <p>All data is generated locally in your browser. No server calls, super fast!</p>
+    </div>
+    <div class="info-card">
+      <div class="icon">🇮🇳</div>
+      <h3>India-Specific</h3>
+      <p>Real Indian state names, cities, PIN codes, phone formats, Aadhaar & PAN patterns.</p>
+    </div>
+    <div class="info-card">
+      <div class="icon">💾</div>
+      <h3>Export Anywhere</h3>
+      <p>Copy as JSON or download as CSV. Use directly in your apps, databases or testing.</p>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <p>Made with ❤️ for Indian Developers &nbsp;·&nbsp; <a href="#">Privacy Policy</a> &nbsp;·&nbsp; All data is fictional</p>
+</footer>
+
+<div class="toast" id="toast">✅ Copied!</div>
+
+<script>
+// ─── DATA POOLS ───────────────────────────────────────────────
+const DATA = {
+  firstNameM: ["Aarav","Arjun","Rahul","Vikram","Rohan","Amit","Suresh","Raj","Karan","Nikhil","Deepak","Sanjay","Manish","Vivek","Pranav","Aditya","Rohit","Gaurav","Sachin","Varun","Harsh","Dev","Siddharth","Ankit","Mohit","Ravi","Arun","Vishal","Kunal","Sumit"],
+  firstNameF: ["Priya","Ananya","Neha","Pooja","Shreya","Kavya","Riya","Aisha","Sneha","Divya","Megha","Simran","Nisha","Tanvi","Swati","Ankita","Preeti","Reshma","Geeta","Sunita","Meena","Lakshmi","Poonam","Rekha","Komal","Jyoti","Aarti","Sapna","Radha","Shweta"],
+  lastName: ["Sharma","Verma","Singh","Patel","Kumar","Gupta","Joshi","Mehta","Shah","Yadav","Mishra","Pandey","Tiwari","Dubey","Chauhan","Rajput","Agarwal","Bansal","Kapoor","Malhotra","Nair","Pillai","Iyer","Reddy","Rao","Naidu","Desai","Parekh","Chopra","Bose"],
+  cities: ["Mumbai","Delhi","Bengaluru","Hyderabad","Chennai","Kolkata","Pune","Ahmedabad","Jaipur","Lucknow","Kanpur","Nagpur","Indore","Thane","Bhopal","Visakhapatnam","Patna","Vadodara","Ghaziabad","Ludhiana","Agra","Nashik","Faridabad","Meerut","Rajkot","Surat","Varanasi","Allahabad","Howrah","Coimbatore"],
+  states: ["Maharashtra","Delhi","Karnataka","Telangana","Tamil Nadu","West Bengal","Uttar Pradesh","Gujarat","Rajasthan","Madhya Pradesh","Bihar","Punjab","Haryana","Odisha","Kerala","Assam","Jharkhand","Uttarakhand","Himachal Pradesh","Chhattisgarh"],
+  streets: ["MG Road","Gandhi Nagar","Nehru Street","Shivaji Marg","Lal Bahadur Nagar","Rajiv Gandhi Colony","Indira Nagar","Subhash Chowk","Tilak Nagar","Ram Nagar","Patel Nagar","Sector 12","Sector 21","Civil Lines","Model Town","Green Park","Vasant Vihar","Andheri West","Koramangala","Banjara Hills"],
+  banks: ["State Bank of India","HDFC Bank","ICICI Bank","Axis Bank","Punjab National Bank","Canara Bank","Bank of Baroda","Union Bank","Kotak Mahindra Bank","IndusInd Bank"],
+  companies: ["TCS","Infosys","Wipro","HCL Technologies","Tech Mahindra","Reliance Industries","Tata Motors","HDFC Ltd","Bajaj Auto","Maruti Suzuki","Flipkart","Zomato","ONGC","Coal India","NTPC"],
+  jobs: ["Software Engineer","Data Analyst","Marketing Manager","Teacher","Doctor","Accountant","Business Analyst","Product Manager","HR Executive","Sales Executive","Civil Engineer","Graphic Designer","Content Writer","Bank Manager","Nurse"],
+  vehicles: ["MH","DL","KA","TN","GJ","UP","RJ","MP","WB","AP","PB","HR","TS","KL","OD"],
+  bloodGroups: ["A+","A-","B+","B-","AB+","AB-","O+","O-"],
+  religions: ["Hindu","Muslim","Christian","Sikh","Buddhist","Jain"],
+  languages: ["Hindi","English","Marathi","Telugu","Tamil","Gujarati","Kannada","Bengali","Punjabi","Malayalam"]
+};
+
+let currentCategory = 'person';
+let generatedData = [];
+
+// ─── HELPERS ──────────────────────────────────────────────────
+function rand(arr) { return arr[Math.floor(Math.random() * arr.length)]; }
+function randInt(a, b) { return Math.floor(Math.random() * (b - a + 1)) + a; }
+function randDigits(n) { return Array.from({length: n}, (_,i) => i===0 ? randInt(1,9) : randInt(0,9)).join(''); }
+
+function aadhaar() {
+  return [randDigits(4), randDigits(4), randDigits(4)].join(' ');
+}
+function pan() {
+  const alpha = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  const r = s => s[Math.floor(Math.random()*s.length)];
+  return r(alpha)+r(alpha)+r(alpha)+r(alpha)+r(alpha)+randInt(0,9)+randInt(0,9)+randInt(0,9)+randInt(0,9)+r(alpha);
+}
+function phone() {
+  const starts = ['6','7','8','9'];
+  return '+91 ' + rand(starts) + randDigits(4) + ' ' + randDigits(5);
+}
+function email(name) {
+  const domains = ['gmail.com','yahoo.co.in','hotmail.com','outlook.com','rediffmail.com'];
+  const n = name.toLowerCase().replace(/ /g,'') + randInt(1,999);
+  return n + '@' + rand(domains);
+}
+function dob() {
+  const y = randInt(1970, 2005);
+  const m = String(randInt(1,12)).padStart(2,'0');
+  const d = String(randInt(1,28)).padStart(2,'0');
+  return `${d}/${m}/${y}`;
+}
+function pin() { return randDigits(6); }
+function ifsc() {
+  const banks = ['SBIN','HDFC','ICIC','UTIB','PUNB','CNRB','BARB','UBIN','KKBK','INDB'];
+  return rand(banks) + '0' + randDigits(6);
+}
+function accountNo() { return randDigits(11); }
+function upi(name) {
+  const handles = ['@okicici','@okhdfcbank','@oksbi','@paytm','@ybl','@ibl'];
+  return name.split(' ')[0].toLowerCase() + randInt(1,99) + rand(handles);
+}
+function ip() { return `${randInt(1,255)}.${randInt(0,255)}.${randInt(0,255)}.${randInt(1,254)}`; }
+function mac() {
+  return Array.from({length:6}, () => randInt(0,255).toString(16).padStart(2,'0').toUpperCase()).join(':');
+}
+function vehicleNo(state) {
+  const vstate = rand(DATA.vehicles);
+  return `${vstate}-${String(randInt(1,99)).padStart(2,'0')}-${String.fromCharCode(65+randInt(0,25))}${String.fromCharCode(65+randInt(0,25))}-${String(randInt(1000,9999))}`;
+}
+
+// ─── GENERATORS ────────────────────────────────────────────────
+function genPerson() {
+  const gender = Math.random() > 0.5 ? 'Male' : 'Female';
+  const fn = gender === 'Male' ? rand(DATA.firstNameM) : rand(DATA.firstNameF);
+  const ln = rand(DATA.lastName);
+  const fullName = fn + ' ' + ln;
+  return {
+    'Name': fullName,
+    'Gender': gender,
+    'DOB': dob(),
+    'Phone': phone(),
+    'Email': email(fullName),
+    'Blood Group': rand(DATA.bloodGroups),
+    'Religion': rand(DATA.religions),
+    'Mother Tongue': rand(DATA.languages),
+    'Aadhaar': aadhaar(),
+    'PAN': pan()
+  };
+}
+
+function genAddress() {
+  const city = rand(DATA.cities);
+  const state = rand(DATA.states);
+  return {
+    'Street': randInt(1,999) + ', ' + rand(DATA.streets),
+    'City': city,
+    'State': state,
+    'PIN Code': pin(),
+    'District': city,
+    'Country': 'India',
+    'Landmark': 'Near ' + rand(['School','Hospital','Temple','Market','Park','Bus Stand','Railway Station'])
+  };
+}
+
+function genFinance() {
+  const gender = Math.random() > 0.5 ? 'Male' : 'Female';
+  const fn = gender === 'Male' ? rand(DATA.firstNameM) : rand(DATA.firstNameF);
+  const ln = rand(DATA.lastName);
+  const name = fn + ' ' + ln;
+  return {
+    'Name': name,
+    'Bank': rand(DATA.banks),
+    'Account No': accountNo(),
+    'IFSC': ifsc(),
+    'PAN': pan(),
+    'Aadhaar': aadhaar(),
+    'UPI ID': upi(name),
+    'Salary': '₹' + (randInt(25,250) * 1000).toLocaleString('en-IN'),
+    'Company': rand(DATA.companies)
+  };
+}
+
+function genInternet() {
+  const gender = Math.random() > 0.5 ? 'Male' : 'Female';
+  const fn = gender === 'Male' ? rand(DATA.firstNameM) : rand(DATA.firstNameF);
+  const ln = rand(DATA.lastName);
+  const name = fn + ' ' + ln;
+  const username = fn.toLowerCase() + randInt(10,999);
+  return {
+    'Name': name,
+    'Username': username,
+    'Email': email(name),
+    'Password': username + '@' + randInt(100,999) + '!',
+    'IP Address': ip(),
+    'MAC Address': mac(),
+    'Phone': phone(),
+    'Job': rand(DATA.jobs)
+  };
+}
+
+function genVehicle() {
+  const gender = Math.random() > 0.5 ? 'Male' : 'Female';
+  const fn = gender === 'Male' ? rand(DATA.firstNameM) : rand(DATA.firstNameF);
+  const ln = rand(DATA.lastName);
+  const types = ['Car','Bike','Scooter','Truck','Auto'];
+  const makers = ['Maruti','Hyundai','Tata','Honda','Bajaj','Hero','TVS','Mahindra','Ford','Toyota'];
+  return {
+    'Owner Name': fn + ' ' + ln,
+    'Vehicle No': vehicleNo(),
+    'Type': rand(types),
+    'Maker': rand(makers),
+    'Year': randInt(2005, 2023),
+    'State': rand(DATA.states),
+    'Insurance No': 'IN' + randDigits(10),
+    'Chassis No': 'MA3' + randDigits(14)
+  };
+}
+
+// ─── UI ────────────────────────────────────────────────────────
+const genFns = { person: genPerson, address: genAddress, finance: genFinance, internet: genInternet, vehicle: genVehicle };
+const catTitles = { person: '👤 Person Data', address: '📍 Address Data', finance: '💳 Finance Data', internet: '🌐 Internet Data', vehicle: '🚗 Vehicle Data' };
+
+function setCategory(cat) {
+  currentCategory = cat;
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('tab-' + cat).classList.add('active');
+  document.getElementById('card-title').textContent = catTitles[cat];
+  generatedData = [];
+  document.getElementById('table-wrap').innerHTML = `<div class="empty-state"><div class="icon">🎲</div><p>Click <strong>Generate</strong> to create fake Indian data!</p></div>`;
+  document.getElementById('stats-bar').style.display = 'none';
+}
+
+function generate() {
+  const count = parseInt(document.getElementById('count-select').value);
+  const fn = genFns[currentCategory];
+  generatedData = Array.from({length: count}, fn);
+
+  const headers = Object.keys(generatedData[0]);
+
+  let html = `<table><thead><tr>
+    <th>#</th>
+    ${headers.map(h => `<th>${h}</th>`).join('')}
+    <th>Copy</th>
+  </tr></thead><tbody>`;
+
+  generatedData.forEach((row, i) => {
+    html += `<tr>
+      <td style="color:var(--muted);font-size:0.8rem">${i+1}</td>
+      ${headers.map(h => {
+        let val = row[h];
+        if(h === 'Gender') return `<td><span class="tag ${val==='Male'?'tag-m':'tag-f'}">${val}</span></td>`;
+        return `<td>${val}</td>`;
+      }).join('')}
+      <td class="copy-cell" onclick="copyRow(${i})" title="Copy row as JSON">📋</td>
+    </tr>`;
+  });
+
+  html += '</tbody></table>';
+  document.getElementById('table-wrap').innerHTML = html;
+  document.getElementById('stats-bar').style.display = 'flex';
+  document.getElementById('stat-count').textContent = count;
+}
+
+function copyRow(i) {
+  navigator.clipboard.writeText(JSON.stringify(generatedData[i], null, 2));
+  showToast('Row copied!');
+}
+
+function copyJSON() {
+  if (!generatedData.length) { showToast('Generate data first!'); return; }
+  navigator.clipboard.writeText(JSON.stringify(generatedData, null, 2));
+  showToast('JSON copied to clipboard!');
+}
+
+function downloadCSV() {
+  if (!generatedData.length) { showToast('Generate data first!'); return; }
+  const headers = Object.keys(generatedData[0]);
+  const rows = generatedData.map(r => headers.map(h => `"${r[h]}"`).join(','));
+  const csv = [headers.join(','), ...rows].join('\n');
+  const blob = new Blob([csv], {type: 'text/csv'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = `indian-fake-data-${currentCategory}.csv`;
+  a.click();
+  showToast('CSV downloaded!');
+}
+
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = (msg.includes('copied') || msg.includes('downloaded') ? '✅ ' : '⚠️ ') + msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2500);
+}
+
+// Auto generate on load
+generate();
+</script>
+</body>
+</html>
